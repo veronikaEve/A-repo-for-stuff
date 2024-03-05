@@ -1,10 +1,10 @@
 import "./style.css";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
+  <div class="wrapper">
     <h1>New Redirector POC</h1>
-    <p class="read-the-docs">
-      This is for the iframe
-    </p>
+    <div class="iframeWrapper">
+    <iframe src="https://tv.client.ott.sky.com/redirector"  title="W3Schools Free Online Web Tutorials"></iframe>
+    </div>
   </div>
 `;
