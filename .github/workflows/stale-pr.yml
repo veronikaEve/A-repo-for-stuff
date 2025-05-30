@@ -1,0 +1,46 @@
+name: Mark stale PRsAdd commentMore actions
+
+on:
+  workflow_dispatch: # Allow manual triggering
+  schedule:
+    # Run every 5 minutes (for testing - adjust as needed)
+    - cron: "*/5 * * * *"
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/stale@v9
+        with:
+          # Mark PRs as stale after 5 minutes (1/288 of a day)
+          # Note: GitHub Actions uses days as the unit, so 5 minutes = 5/1440 ≈ 0.0035 days
+          days-before-pr-stale: 0.0035
+
+          # Don't auto-close stale PRs (set to -1)
+          days-before-pr-close: 0.04 # 1 hour (1/24 of a day)
+
+          stale-pr-message: |
+            🕐 **Stale PR Reminder**
+
+            This PR has been inactive for 5 minutes. To keep the momentum going:
+
+            - [ ] Review and address any feedback
+            - [ ] Rebase if needed to resolve conflicts  
+            - [ ] Add any missing tests or documentation
+            - [ ] Request review if ready
+
+            If this PR is no longer needed, please close it.
+
+            *Remove the stale label or add a comment to reset the timer.*
+
+          stale-pr-label: "stale"
+
+          exempt-pr-labels: "no-stale-check,keep-open,work-in-progress"
+
+          exempt-draft-pr: true
+
+          remove-stale-when-updated: true
