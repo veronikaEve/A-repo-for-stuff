@@ -5,8 +5,8 @@ on:
     types: [opened, reopened, synchronize, labeled, unlabeled, edited]
   workflow_dispatch: # Allow manual triggering
   schedule:
-    # Run every 5 minutes (for testing - adjust as needed)
-    - cron: "*/5 * * * *"
+    # Run every 20 minutes (for testing - adjust as needed)
+    - cron: "*/20 * * * *"
 
 jobs:
   stale:
@@ -25,7 +25,7 @@ jobs:
           stale-pr-message: |
             🕐 **Stale PR Reminder**
 
-            Hey @author! This PR has been inactive for 5 minutes. To keep the momentum going:
+            This PR has been inactive for 5 minutes. To keep the momentum going:
 
             - [ ] Review and address any feedback
             - [ ] Rebase if needed to resolve conflicts  
