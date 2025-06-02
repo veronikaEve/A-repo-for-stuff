@@ -1,6 +1,8 @@
 name: Mark stale PRsAdd commentMore actions
 
 on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, labeled, unlabeled, edited]
   workflow_dispatch: # Allow manual triggering
   schedule:
     # Run every 5 minutes (for testing - adjust as needed)
@@ -39,12 +41,12 @@ jobs:
           exempt-draft-pr: true
 
           # Don't auto-close stale PRs (set to -1)
-          days-before-pr-close: 0.04 # 1 hour (1/24 of a day)
+          days-before-pr-close: 0.007
 
           close-pr-message: |
             🗑️ **PR Closed**
 
-            This PR has been inactive for 1 hour and has been closed. If you still need this PR, please reopen it.
+            This PR has been inactive for 10 minutes and has been closed. If you still need this PR, please reopen it.
 
           exempt-pr-labels: "no-stale-check,keep-open,work-in-progress"
 
