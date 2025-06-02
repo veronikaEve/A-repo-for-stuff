@@ -1,12 +1,9 @@
 name: Mark stale PRsAdd commentMore actions
 
 on:
-  pull_request_target:
-    types: [opened, reopened, synchronize, labeled, unlabeled, edited]
   workflow_dispatch: # Allow manual triggering
   schedule:
-    # Run every 2 minutes for testing
-    - cron: "*/2 * * * *"
+    - cron: "0 9 * * *" # Runs 9 am UTC every day
 
 jobs:
   stale:
@@ -18,7 +15,9 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          days-before-pr-stale: 0.007 # 10 minutes (easier to test)
+          days-before-pr-stale: 5
+
+          days-before-pr-close: 5 # another 5 days after being marked stale
 
           stale-pr-message: |
             🕐 **Stale PR Reminder**
@@ -30,22 +29,19 @@ jobs:
             - [ ] Add any missing tests or documentation
             - [ ] Request review if ready
 
-            If this PR is no longer needed, please close it.
+            If this PR is no longer needed, please close it, or turn it into a draft.
 
             *Remove the stale label or add a comment to reset the timer.*
 
           stale-pr-label: "stale"
 
+          exempt-pr-labels: "no-stale-check,keep-open,work-in-progress"
+
           exempt-draft-pr: true
 
-          # Don't auto-close stale PRs (set to -1)
-          days-before-pr-close: 0.021 # 30 minutes after stale
+          remove-stale-when-updated: true
 
           close-pr-message: |
             🗑️ **PR Closed**
 
-            This PR has been inactive for 10 minutes and has been closed. If you still need this PR, please reopen it.
-
-          exempt-pr-labels: "no-stale-check,keep-open,work-in-progress"
-
-          remove-stale-when-updated: true
+            This PR has been inactive for 5 days and has been closed. If you still need this PR, please reopen it.
