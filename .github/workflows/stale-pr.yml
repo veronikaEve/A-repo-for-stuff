@@ -23,7 +23,7 @@ jobs:
           stale-pr-message: |
             🕐 **Stale PR Reminder**
 
-            This PR has been inactive for 5 minutes. To keep the momentum going:
+            Hey @author! This PR has been inactive for 5 minutes. To keep the momentum going:
 
             - [ ] Review and address any feedback
             - [ ] Rebase if needed to resolve conflicts  
