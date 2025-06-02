@@ -20,9 +20,6 @@ jobs:
           # Note: GitHub Actions uses days as the unit, so 5 minutes = 5/1440 ≈ 0.0035 days
           days-before-pr-stale: 0.0035
 
-          # Don't auto-close stale PRs (set to -1)
-          days-before-pr-close: 0.04 # 1 hour (1/24 of a day)
-
           stale-pr-message: |
             🕐 **Stale PR Reminder**
 
@@ -39,8 +36,16 @@ jobs:
 
           stale-pr-label: "stale"
 
-          exempt-pr-labels: "no-stale-check,keep-open,work-in-progress"
-
           exempt-draft-pr: true
+
+          # Don't auto-close stale PRs (set to -1)
+          days-before-pr-close: 0.04 # 1 hour (1/24 of a day)
+
+          close-pr-message: |
+            🗑️ **PR Closed**
+
+            This PR has been inactive for 1 hour and has been closed. If you still need this PR, please reopen it.
+
+          exempt-pr-labels: "no-stale-check,keep-open,work-in-progress"
 
           remove-stale-when-updated: true
