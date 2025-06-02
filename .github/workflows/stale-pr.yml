@@ -5,8 +5,8 @@ on:
     types: [opened, reopened, synchronize, labeled, unlabeled, edited]
   workflow_dispatch: # Allow manual triggering
   schedule:
-    # Run every 20 minutes (for testing - adjust as needed)
-    - cron: "*/20 * * * *"
+    # Run every 2 minutes for testing
+    - cron: "*/2 * * * *"
 
 jobs:
   stale:
@@ -18,9 +18,7 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          # Mark PRs as stale after 5 minutes (1/288 of a day)
-          # Note: GitHub Actions uses days as the unit, so 5 minutes = 5/1440 ≈ 0.0035 days
-          days-before-pr-stale: 0.0035
+          days-before-pr-stale: 0.007 # 10 minutes (easier to test)
 
           stale-pr-message: |
             🕐 **Stale PR Reminder**
@@ -41,7 +39,7 @@ jobs:
           exempt-draft-pr: true
 
           # Don't auto-close stale PRs (set to -1)
-          days-before-pr-close: 0.007
+          days-before-pr-close: 0.021 # 30 minutes after stale
 
           close-pr-message: |
             🗑️ **PR Closed**
